@@ -1,0 +1,46 @@
+@model TopNSoldBooksVm
+
+<h3>Топ проданих книжок</h3>
+@if (Model != null)
+{
+    <div>
+        <form class="my-2 d-flex" style="gap:5px" asp-action="TopFiveSellingBooks" method="get">
+            <input type="date" style="width: 200px;" class="form-control" name="sDate" />
+            <input type="date" style="width: 200px;" class="form-control" name="eDate" />
+            <button class="btn btn-primary">Фільтрувати</button>
+            <a class="btn btn-primary" href="/Reports/TopFiveSellingBooks">Очистити</a>
+        </form>
+
+        <h4>Показано результати з @Model.StartDate.ToString("dd-MMM-yyyy") по @Model.EndDate.ToString("dd-MMM-yyyy")</h4>
+
+        @if (Model.TopNSoldBooks.Count() == 0)
+        {
+            <div class="my-3" style="font-size:16px; font-weight:bold">
+                Записів не знайдено
+            </div>
+        }
+        else
+        {
+            <table style="width: 50%;" class="table table-striped">
+                <thead>
+                <th>Книга</th>
+                <th>Продано одиниць</th>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.TopNSoldBooks)
+                    {
+                        <tr>
+                            <td>@item.BookName від @item.AuthorName</td>
+                            <td>@item.TotalUnitSold</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
+else
+{
+    <h4>Щось пішло не так</h4>
+}

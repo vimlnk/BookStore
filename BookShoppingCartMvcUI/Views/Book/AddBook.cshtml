@@ -1,0 +1,52 @@
+﻿@model BookDTO
+@{
+    Layout = "_AdminLayout";
+}
+<div style="width:50%">
+    <h2>Додати книгу</h2>
+    <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Назад</a>
+    <form asp-action="AddBook" enctype="multipart/form-data" method="post"> <!-- Одна форма для всіх полів -->
+
+        <div class="my-2">
+            <label>Назва книги*</label>
+            <input type="text" class="form-control" asp-for="BookName" />
+            <span asp-validation-for="BookName" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Автор*</label>
+            <input type="text" class="form-control" asp-for="AuthorName" />
+            <span asp-validation-for="AuthorName" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Жанр*</label>
+            <select class="form-control" asp-for="GenreId" asp-items="Model.GenreList">
+                <option value="">Виберіть жанр</option>
+            </select>
+            <span asp-validation-for="GenreId" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Ціна*</label>
+            <input type="number" class="form-control" asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Зображення</label>
+            <input type="file" class="form-control" asp-for="ImageFile" />
+        </div>
+
+        <div class="my-2">
+            <label for="Annotation">Анотація</label>
+            <textarea asp-for="Annotation" class="form-control"></textarea> <!-- Закрили тег textarea -->
+            <span asp-validation-for="Annotation" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <button type="submit" class="btn btn-info">Додати</button>
+        </div>
+
+    </form>
+</div>
